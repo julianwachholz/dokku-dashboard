@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana:8.2.3
+    user: root
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/data/dashboards/dokku-dash:/var/lib/grafana/dashboards/dokku-dash:ro
+      - ./grafana/config/provisioning:/etc/grafana/provisioning:ro
+
+  influxdb:
+    image: influxdb:2.1.0
+    environment:
+      INFLUXDB_LOGGING_LEVEL: "error"
+
+  telegraf:
+    image: telegraf:1.20.3
+    user: root
+    privileged: true
+    ipc: host
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/hostfs:ro
+      - /etc:/hostfs/etc:ro
+      - /proc:/hostfs/proc:ro
+      - /sys:/hostfs/sys:ro
+      - /var:/hostfs/var:ro
+      - /run:/hostfs/run:ro
+    environment:
+      HOST_ETC: "/hostfs/etc"
+      HOST_PROC: "/hostfs/proc"
+      HOST_SYS: "/hostfs/sys"
+      HOST_VAR: "/hostfs/var"
+      HOST_RUN: "/hostfs/run"
+      HOST_MOUNT_PREFIX: "/hostfs"
