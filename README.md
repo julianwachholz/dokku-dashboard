@@ -9,12 +9,12 @@ A Grafana dashboard for your Dokku server.
 
    ```bash
    git remote add dokku-telegraf dokku@dokku-server:telegraf
-   git push dokku-telegraf
+   git push dokku-telegraf main
    ```
 
 3. Add remote to deploy grafana
 
    ```bash
    git remote add dokku-grafana dokku@dokku-server:grafana
-   git push dokku-grafana
+   git push dokku-grafana main
    ```

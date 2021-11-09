@@ -6,16 +6,16 @@ dokku network:create dashboard
 # Prepare the influxdb app
 dokku apps:create influxdb
 dokku proxy:disable influxdb
-dokku network:set influxdb initial-network monitoring
+dokku network:set influxdb attach-post-create dashboard
 dokku config:set influxdb INFLUXDB_LOGGING_LEVEL=error
 dokku git:from-image influxdb influxdb:1.8
 
 # Prepare the telegraf app
 dokku apps:create telegraf
 dokku proxy:disable telegraf
-dokku network:set influxdb initial-network monitoring
+dokku network:set telegraf attach-post-create dashboard
 dokku builder-dockerfile:set telegraf dockerfile-path telegraf.dockerfile
-dokku docker-options:add telegraf run "--ipc=host" "--privileged" \
+dokku docker-options:add telegraf deploy,run "--ipc=host" "--privileged" \
   "-v /var/run/docker.sock:/var/run/docker.sock:ro" \
   "-v /:/hostfs:ro" \
   "-v /etc:/hostfs/etc:ro" \
@@ -32,5 +32,5 @@ dokku docker-options:add telegraf run "--ipc=host" "--privileged" \
 
 # Prepare the grafana app
 dokku apps:create grafana
-dokku network:set grafana initial-network monitoring
+dokku network:set grafana attach-post-create dashboard
 dokku builder-dockerfile:set grafana dockerfile-path grafana.dockerfile

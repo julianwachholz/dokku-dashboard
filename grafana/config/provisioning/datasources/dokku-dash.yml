@@ -6,7 +6,7 @@ datasources:
     type: influxdb
     access: proxy
     orgId: 1
-    url: http://influxdb:8086
+    url: http://influxdb.web:8086
     password:
     user:
     database: telegraf
