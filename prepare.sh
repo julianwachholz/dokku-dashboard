@@ -1,5 +1,17 @@
 #!/usr/bin/bash -e
 
+# Enable Nginx stub status
+# cat <<'EOF' | sudo tee /tmp/test
+cat <<'EOF' | sudo tee /etc/nginx/conf.d/stub_status.conf
+server {
+  server_name localhost;
+  location = /stub_status {
+    stub_status;
+  }
+}
+EOF
+sudo service nginx reload
+
 # Create a network for the services
 dokku network:create dashboard
 
