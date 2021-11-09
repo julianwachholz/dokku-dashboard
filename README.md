@@ -18,3 +18,6 @@ A Grafana dashboard for your Dokku server.
    git remote add dokku-grafana dokku@dokku-server:grafana
    git push dokku-grafana main
    ```
+
+4. Go to your Grafana site and setup your admin account.
+   The default username and password is "admin".
