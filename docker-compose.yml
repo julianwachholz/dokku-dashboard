@@ -2,7 +2,6 @@ version: "3.8"
 services:
   grafana:
     image: grafana/grafana:8.2.3
-    user: root
     ports:
       - "3000:3000"
     volumes:
@@ -10,13 +9,12 @@ services:
       - ./grafana/config/provisioning:/etc/grafana/provisioning:ro
 
   influxdb:
-    image: influxdb:2.1.0
+    image: influxdb:1.8
     environment:
       INFLUXDB_LOGGING_LEVEL: "error"
 
   telegraf:
-    image: telegraf:1.20.3
-    user: root
+    image: telegraf:1.20
     privileged: true
     ipc: host
     volumes:
