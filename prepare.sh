@@ -69,7 +69,3 @@ dokku storage:ensure-directory grafana-data
 dokku storage:mount influxdb /var/lib/dokku/data/storage/grafana-data:/var/lib/grafana
 # Deploy from dockerfile
 dokku builder-dockerfile:set grafana dockerfile-path grafana.dockerfile
-
-# Expose via domain
-dokku domains:add grafana dashboard.mywebsite.com
-dokku letsencrypt:enable grafana

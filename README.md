@@ -21,3 +21,10 @@ A Grafana dashboard for your Dokku server.
 
 4. Go to your Grafana site and setup your admin account.
    The default username and password is "admin".
+
+5. Expose the Grafana interface with a domain:
+
+   ```bash
+   dokku domains:add grafana dashboard.mywebsite.com
+   dokku letsencrypt:enable grafana
+   ```
