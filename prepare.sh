@@ -66,6 +66,7 @@ dokku network:set grafana attach-post-create dashboard
 dokku proxy:ports-set grafana http:80:3000 https:443:3000
 # Persistent storage
 dokku storage:ensure-directory grafana-data
+sudo chown -R 472:472 /var/lib/dokku/data/storage/grafana-data
 dokku storage:mount grafana /var/lib/dokku/data/storage/grafana-data:/var/lib/grafana
 # Deploy from dockerfile
 dokku builder-dockerfile:set grafana dockerfile-path grafana.dockerfile
