@@ -28,3 +28,5 @@ A Grafana dashboard for your Dokku server.
    dokku domains:add grafana dashboard.mywebsite.com
    dokku letsencrypt:enable grafana
    ```
+
+6. `dokku proxy:build-config grafana`
